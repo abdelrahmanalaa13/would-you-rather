@@ -3,14 +3,15 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
 import { createStore } from "redux";
-import { provider } from "react-redux";
+import { Provider } from "react-redux";
 import reducer from "./reducers";
+import middelware from "./middelware";
 
-const store = createStore(reducer);
+const store = createStore(reducer, middelware);
 
 ReactDOM.render(
-  <provider store={store}>
+  <Provider store={store}>
     <App />
-  </provider>,
+  </Provider>,
   document.getElementById("root")
 );
