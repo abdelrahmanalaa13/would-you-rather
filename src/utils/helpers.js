@@ -5,7 +5,7 @@ export const formatDate = (timestamp) => {
 }
 
 export const formatQuestion = (question, author, authedUser) => {
-  const { id, likes, replies, optionOne, optionTwo, timestamp } = question;
+  const { id, optionOne, optionTwo, timestamp } = question;
   const { name, avatarURL } = author;
 
   return {
@@ -15,8 +15,8 @@ export const formatQuestion = (question, author, authedUser) => {
     optionOne,
     optionTwo,
     avatar: avatarURL,
-    optionsOne: likes.length,
-    optionsTwo: replies.length,
-    hasAnswered: likes.includes(authedUser),
+    optionsOne: optionOne.votes.length,
+    optionsTwo: optionTwo.votes.length,
+    hasAnswered: optionOne.votes.includes(authedUser) || optionTwo.votes.includes(authedUser),
   };
 }
