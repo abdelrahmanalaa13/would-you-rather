@@ -20,7 +20,7 @@ a {
   text-transform: uppercase;
   margin: 35px auto;
   padding: 10px;
-  border: 1px solid rgba(0,0,0,.29);
+  border: 1px solid rgba(0, 0, 0, 0.29);
   cursor: pointer;
   background: #fff;
   font-size: 16px;
@@ -29,7 +29,7 @@ a {
 }
 
 .btn:hover {
-  border-color: rgba(0,0,0,.5);
+  border-color: rgba(0, 0, 0, 0.5);
   text-decoration: none;
 }
 
@@ -57,6 +57,13 @@ a {
 .nav li:first-child {
   padding-left: 0;
 }
+.dashboard-list {
+  max-width: 590px;
+  margin: auto;
+}
+.dashboard-list .tabs .menu {
+  justify-content: center;
+}
 
 ul {
   padding-left: 0;
@@ -82,13 +89,14 @@ li {
   margin: 0 auto;
   border: 1px solid #dad7d7;
   border-radius: 3px;
-  cursor: pointer;
 }
 
 .question-info {
-  margin: 10px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  border-left: 1px solid rgba(0,0,0,.2);
 }
 
 /* Hacky but less typing in the video */
@@ -159,5 +167,14 @@ li {
   text-align: right;
   margin-top: 10px;
   font-size: 20px;
-  color: #C3392A;
+  color: #c3392a;
+}
+
+.question .viewBtn {
+  border-radius: 4px;
+  border: 2px solid #1e961e;
+  background: transparent;
+  color: #1e961e;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
