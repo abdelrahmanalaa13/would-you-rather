@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Question from "./Question.js";
+// import Question from "./Question.js";
+import AnsQuestion from "./AnsQuestion.js";
 import { Tab } from "semantic-ui-react";
 
 class Dashboard extends Component {
@@ -23,9 +24,9 @@ const tabs = (props) => {
       menuItem: "Un-Answered",
       render: () => (
         <Tab.Pane>
-          {props.ansQuestions.map((question) => (
+          {props.unAnsQuestions.map((question) => (
             <li key={question.id}>
-              <Question key={question.id} id={question.id} isQuestion={false} />
+              <AnsQuestion key={question.id} id={question.id} isQuestion={false} />
             </li>
           ))}
         </Tab.Pane>
@@ -35,9 +36,9 @@ const tabs = (props) => {
       menuItem: "Answered",
       render: () => (
         <Tab.Pane>
-          {props.unAnsQuestions.map((question) => (
+          {props.ansQuestions.map((question) => (
             <li key={question.id}>
-              <Question key={question.id} id={question.id} isQuestion={true} />
+              <AnsQuestion key={question.id} id={question.id} isQuestion={true} />
             </li>
           ))}
         </Tab.Pane>
@@ -46,13 +47,17 @@ const tabs = (props) => {
   ];
 };
 
-function mapStateToProps({ questions }) {
+function mapStateToProps({ authedUser, users, questions }) {
+  const userAnsweredIds = Object.keys(users[authedUser].answers);
+
   const ansQuestions = Object.values(questions)
-    .filter((question) => question.hasAnswered)
+    .filter((question) => !userAnsweredIds.includes(question.id))
     .sort((a, b) => b.timestamp - a.timestamp);
+    console.log('ans', ansQuestions);
   const unAnsQuestions = Object.values(questions)
-    .filter((question) => !question.hasAnswered)
+    .filter((question) => userAnsweredIds.includes(question.id))
     .sort((a, b) => b.timestamp - a.timestamp);
+    console.log('UNans', unAnsQuestions);
   return {
     questionIds: Object.keys(questions).sort(
       (a, b) => questions[b].timestamp - questions[a].timestamp

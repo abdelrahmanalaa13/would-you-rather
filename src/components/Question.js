@@ -45,7 +45,7 @@ function mapStateToProps({ authedUser, users, questions }, { id }) {
   const question = questions[id];
   return {
     authedUser,
-    question: formatQuestion(question, users[question.author], authedUser),
+    question: formatQuestion(question, users[question.author]),
   };
 }
 

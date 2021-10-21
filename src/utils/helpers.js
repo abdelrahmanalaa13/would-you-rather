@@ -4,7 +4,7 @@ export const formatDate = (timestamp) => {
   return time.substr(0, 5) + time.slice(-2) + " | " + d.toLocaleDateString();
 }
 
-export const formatQuestion = (question, author, authedUser) => {
+export const formatQuestion = (question, author) => {
   const { id, optionOne, optionTwo, timestamp } = question;
   const { name, avatarURL } = author;
 
@@ -17,6 +17,5 @@ export const formatQuestion = (question, author, authedUser) => {
     avatar: avatarURL,
     optionsOne: optionOne.votes.length,
     optionsTwo: optionTwo.votes.length,
-    hasAnswered: optionOne.votes.includes(authedUser) || optionTwo.votes.includes(authedUser),
   };
 }
