@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 // import Question from "./Question.js";
 import AnsQuestion from "./AnsQuestion.js";
 import { Tab } from "semantic-ui-react";
+import ResultQuestion from "./ResultQuestion.js";
 
 class Dashboard extends Component {
   state = {
@@ -38,7 +39,7 @@ const tabs = (props) => {
         <Tab.Pane>
           {props.ansQuestions.map((question) => (
             <li key={question.id}>
-              <AnsQuestion key={question.id} id={question.id} isQuestion={true} />
+              <ResultQuestion key={question.id} question={question} isQuestion={true} />
             </li>
           ))}
         </Tab.Pane>
@@ -51,11 +52,11 @@ function mapStateToProps({ authedUser, users, questions }) {
   const userAnsweredIds = Object.keys(users[authedUser].answers);
 
   const ansQuestions = Object.values(questions)
-    .filter((question) => !userAnsweredIds.includes(question.id))
+    .filter((question) => userAnsweredIds.includes(question.id))
     .sort((a, b) => b.timestamp - a.timestamp);
     console.log('ans', ansQuestions);
   const unAnsQuestions = Object.values(questions)
-    .filter((question) => userAnsweredIds.includes(question.id))
+    .filter((question) => !userAnsweredIds.includes(question.id))
     .sort((a, b) => b.timestamp - a.timestamp);
     console.log('UNans', unAnsQuestions);
   return {
