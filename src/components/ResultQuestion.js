@@ -11,18 +11,16 @@ class ResultQuestion extends Component {
     e.preventDefault();
     if (this.state.chosenAns !== "") {
       const { authedUser, question, handleAddAnswer } = this.props;
-      console.log(this.state.chosenAns);
       handleAddAnswer(authedUser, question.id, this.state.chosenAns);
     }
   };
   render() {
-    const { question, author } = this.props;
-    console.log(userVote);
-    if (!question) {
-      return <p>Couldn't find the question</p>;
+    const { question, users } = this.props;
+    if (!question || !users[question.author]) {
+      return <Redirect to="/not-found" />;
     }
     const { timestamp, optionOne, optionTwo, id } = question;
-    const { name, avatarURL, answers } = author;
+    const { name, avatarURL, answers } = users[question.author];
     const optionOneVotes = optionOne.votes.length;
     const optionTwoVotes = optionTwo.votes.length;
     const votesTotal = optionOneVotes + optionTwoVotes;
@@ -67,9 +65,8 @@ class ResultQuestion extends Component {
 function mapStateToProps({ users, questions }, props) {
   const { id } = props.match.params;
   const question = questions[id];
-  const author = users[question.author];
   return {
-    author,
+    users,
     question,
   };
 }

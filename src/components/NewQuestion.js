@@ -10,14 +10,12 @@ class NewQuestion extends Component {
   };
   handleOptionOne = (e) => {
     const OptionOne = e.target.value;
-    console.log(OptionOne);
     this.setState(() => ({
       OptionOne,
     }));
   };
   handleOptionTwo = (e) => {
     const OptionTwo = e.target.value;
-    console.log(OptionTwo);
 
     this.setState(() => ({
       OptionTwo,
