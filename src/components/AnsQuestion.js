@@ -22,17 +22,17 @@ class AnsQuestion extends Component {
     }
   };
   render() {
-    const { question, author } = this.props;
-    const { chosenAns, toResult } = this.state
+    const { question, users } = this.props;
+    const { chosenAns, toResult } = this.state;
     if (toResult === true) {
       return <Redirect to={`/result-question/${question.id}`} />;
     }
 
-    if (!question) {
-      return <p>Couldn't find the question</p>;
+    if (!question || !users[question.author]) {
+      return <Redirect to="/not-found" />;
     }
     const { timestamp, optionOne, optionTwo } = question;
-    const { name, avatarURL } = author;
+    const { name, avatarURL } = users[question.author];
 
     return (
       <div className="question">
@@ -85,10 +85,9 @@ class AnsQuestion extends Component {
 function mapStateToProps({ authedUser, users, questions }, props) {
   const { id } = props.match.params;
   const question = questions[id];
-  const author = users[question.author];
   return {
     authedUser,
-    author,
+    users,
     question,
   };
 }

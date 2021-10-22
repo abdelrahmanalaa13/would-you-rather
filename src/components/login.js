@@ -6,7 +6,6 @@ import { setAuthedUser } from "../actions/authedUser";
 class Login extends Component {
   handleLogIn = (e, { value }) => {
     e.preventDefault();
-    console.log(value);
     this.props.dispatch(setAuthedUser(value));
   };
 

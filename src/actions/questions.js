@@ -31,7 +31,6 @@ export function handleAddQuestion(optionOneText, optionTwoText, author) {
     dispatch(showLoading());
     return saveQuestion({ optionOneText, optionTwoText, author }).then(
       (question) => {
-        console.log(question);
         dispatch(addQuestion(question));
         dispatch(addQuestionToUser(question));
         dispatch(hideLoading());
