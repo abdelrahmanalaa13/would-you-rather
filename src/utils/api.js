@@ -1,13 +1,12 @@
 import * as Data from "./_DATA.js";
 
-export function getInitialData () {
-  return Promise.all([
-    Data._getUsers(),
-    Data._getQuestions(),
-  ]).then(([users, questions]) => ({
-    users,
-    questions,
-  }))
+export function getInitialData() {
+  return Promise.all([Data._getUsers(), Data._getQuestions()]).then(
+    ([users, questions]) => ({
+      users,
+      questions,
+    })
+  );
 }
 
 export const saveQuestion = (question) => {

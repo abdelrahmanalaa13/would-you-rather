@@ -3,6 +3,7 @@ import { answerQuestion } from "./questions";
 
 export const RECEIVE_USERS = "RECEIVE_USERS";
 export const ADD_USER_ANSWER = "ADD_USER_ANSWER";
+export const ADD_QUESTION_TO_USER = "ADD_QUESTION_TO_USER";
 
 export const receiveUsers = (users) => ({
   type: RECEIVE_USERS,
@@ -33,3 +34,11 @@ export const handleAddAnswer = (authUser, questionId, answer) => {
     });
   };
 };
+
+export function addQuestionToUser({ id, author }) {
+  return {
+    type: ADD_QUESTION_TO_USER,
+    id,
+    author,
+  };
+}

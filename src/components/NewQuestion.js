@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button, Form, Input } from "semantic-ui-react";
-import { formatQuestion, formatDate } from "../utils/helpers";
+import { handleAddQuestion } from "../actions/questions";
 
 class NewQuestion extends Component {
   state = {
@@ -10,17 +10,26 @@ class NewQuestion extends Component {
   };
   handleOptionOne = (e) => {
     const OptionOne = e.target.value;
-
+    console.log(OptionOne);
     this.setState(() => ({
       OptionOne,
     }));
   };
   handleOptionTwo = (e) => {
     const OptionTwo = e.target.value;
+    console.log(OptionTwo);
 
     this.setState(() => ({
       OptionTwo,
     }));
+  };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { authedUser, dispatch } = this.props;
+    const { OptionOne, OptionTwo } = this.state;
+    if (OptionOne && OptionTwo) {
+      dispatch(handleAddQuestion(OptionOne, OptionTwo, authedUser));
+    }
   };
   render() {
     return (
@@ -51,6 +60,7 @@ class NewQuestion extends Component {
                 size="tiny"
                 fluid
                 positive
+                disabled={!this.state.OptionOne || !this.state.OptionTwo}
                 content="Submit"
               />
             </Form.Field>
@@ -61,11 +71,9 @@ class NewQuestion extends Component {
   }
 }
 
-function mapStateToProps({ authedUser, users, questions }, { id }) {
-  //   const question = questions[id];
+function mapStateToProps({ authedUser }) {
   return {
     authedUser,
-    // question: formatQuestion(question, users[question.author]),
   };
 }
 
