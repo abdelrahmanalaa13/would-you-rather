@@ -7,6 +7,8 @@ import Nav from "./Navbar";
 import LoadingBar from "react-redux-loading";
 import ResultQuestion from "./ResultQuestion";
 import AnsQuestion from "./AnsQuestion";
+import NewQuestion from "./NewQuestion";
+import LeaderBoard from "./LeaderBoard";
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());
@@ -24,8 +26,8 @@ class App extends Component {
                 <Route path="/" exact component={Dashboard} />
                 <Route path="/ans-question/:id" component={AnsQuestion} />
                 <Route path="/result-question/:id" component={ResultQuestion} />
-                {/* <Route path='/result-question/:id' component={ResultQuestion} /> */}
-                <Route path='/new' component={New} />
+                <Route path='/new' component={NewQuestion} />
+                <Route path='/leaderboard' component={LeaderBoard} />
               </div>
             )}
           </div>

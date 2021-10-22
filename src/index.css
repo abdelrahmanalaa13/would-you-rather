@@ -43,6 +43,10 @@ a {
   text-align: center;
 }
 
+.inherit-width {
+  width: inherit;
+}
+
 .active {
   font-weight: bold;
 }
@@ -96,7 +100,7 @@ li {
   display: flex;
   flex-direction: column;
   width: 100%;
-  border-left: 1px solid rgba(0,0,0,.2);
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 /* Hacky but less typing in the video */
