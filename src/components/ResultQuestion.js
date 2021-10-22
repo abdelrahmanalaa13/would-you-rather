@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { formatDate } from "../utils/helpers";
 import { Progress } from "semantic-ui-react";
+import { Redirect } from "react-router";
 class ResultQuestion extends Component {
   state = {
     chosenAns: "",
