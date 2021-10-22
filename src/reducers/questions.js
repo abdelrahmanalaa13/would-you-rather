@@ -1,4 +1,8 @@
-import { RECEIVE_QUESTIONS, ANSWER_QUESTION } from "../actions/questions";
+import {
+  RECEIVE_QUESTIONS,
+  ANSWER_QUESTION,
+  ADD_QUESTION,
+} from "../actions/questions";
 
 export default function questions(state = {}, action) {
   switch (action.type) {
@@ -8,17 +12,24 @@ export default function questions(state = {}, action) {
         ...action.questions,
       };
     case ANSWER_QUESTION:
-      const { authUser, questionId, answer } = action;
+      const { authedUser, qid, answer } = action;
 
       return {
         ...state,
-        [questionId]: {
-          ...state[questionId],
+        [qid]: {
+          ...state[qid],
           [answer]: {
-            ...state[questionId][answer],
-            votes: state[questionId][answer].votes.concat(authUser),
+            ...state[qid][answer],
+            votes: state[qid][answer].votes.concat(authedUser),
           },
         },
+      };
+    case ADD_QUESTION:
+      const { question } = action;
+
+      return {
+        ...state,
+        [question.id]: question,
       };
     default:
       return state;

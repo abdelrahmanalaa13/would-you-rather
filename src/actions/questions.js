@@ -11,11 +11,11 @@ export const receiveQuestions = (questions) => ({
   questions,
 });
 
-export const answerQuestion = (authUser, questionId, answer) => {
+export const answerQuestion = (authedUser, qid, answer) => {
   return {
     type: ANSWER_QUESTION,
-    authUser,
-    questionId,
+    authedUser,
+    qid,
     answer,
   };
 };

@@ -1,41 +1,42 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { formatQuestion, formatDate } from "../utils/helpers";
+import { formatDate } from "../utils/helpers";
 import { Radio, Button, Form } from "semantic-ui-react";
 import { handleAddAnswer } from "../actions/users";
+import { Redirect } from "react-router";
 class AnsQuestion extends Component {
   state = {
     chosenAns: "",
+    toResult: false,
   };
   handleChoose = (e, { value }) => this.setState({ chosenAns: value });
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.state.chosenAns !== "") {
       const { authedUser, question, handleAddAnswer } = this.props;
-      console.log(this.state.chosenAns);
       handleAddAnswer(authedUser, question.id, this.state.chosenAns);
+      this.setState(() => ({
+        chosenAns: "",
+        toResult: true,
+      }));
     }
   };
   render() {
-    const { question } = this.props;
+    const { question, author } = this.props;
+    const { chosenAns, toResult } = this.state
+    if (toResult === true) {
+      return <Redirect to={`/result-question/${question.id}`} />;
+    }
+
     if (!question) {
       return <p>Couldn't find the question</p>;
     }
-    const {
-      name,
-      avatar,
-      id,
-      timestamp,
-      optionOne,
-      optionTwo,
-      // optionsOne,
-      // optionsTwo,
-      // hasAnswered,
-    } = question;
+    const { timestamp, optionOne, optionTwo } = question;
+    const { name, avatarURL } = author;
 
     return (
       <div className="question">
-        <img src={avatar} alt={`Avatar of ${name}`} className="avatar" />
+        <img src={avatarURL} alt={`Avatar of ${name}`} className="avatar" />
         <div className="question-info">
           <div>
             <h2>{name}</h2>
@@ -50,7 +51,7 @@ class AnsQuestion extends Component {
                     label={optionOne.text}
                     name="radioGroup"
                     value="optionOne"
-                    checked={this.state.chosenAns === "optionOne"}
+                    checked={chosenAns === "optionOne"}
                     onChange={this.handleChoose}
                   />
                   <br />
@@ -58,7 +59,7 @@ class AnsQuestion extends Component {
                     label={optionTwo.text}
                     name="radioGroup"
                     value="optionTwo"
-                    checked={this.state.chosenAns === "optionTwo"}
+                    checked={chosenAns === "optionTwo"}
                     onChange={this.handleChoose}
                   />
                 </Form.Field>
@@ -81,11 +82,14 @@ class AnsQuestion extends Component {
   }
 }
 
-function mapStateToProps({ authedUser, users, questions }, { id }) {
+function mapStateToProps({ authedUser, users, questions }, props) {
+  const { id } = props.match.params;
   const question = questions[id];
+  const author = users[question.author];
   return {
     authedUser,
-    question: formatQuestion(question, users[question.author]),
+    author,
+    question,
   };
 }
 

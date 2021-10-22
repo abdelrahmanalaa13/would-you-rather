@@ -51,6 +51,16 @@ a {
   font-weight: bold;
 }
 
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.user-details {
+  display: flex;
+  align-items: center;
+}
+
 .nav ul {
   display: flex;
   flex-direction: row;
@@ -188,4 +198,14 @@ li {
 }
 .d-block {
   display: block !important;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 590px;
+  padding: 10px;
+  margin: 4% auto;
+  border: 1px solid #dad7d7;
+  border-radius: 3px;
+  text-align: center;
 }

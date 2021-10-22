@@ -1,15 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import Question from "./Question.js";
-import AnsQuestion from "./AnsQuestion.js";
+import Question from "./Question.js";
 import { Tab } from "semantic-ui-react";
-import ResultQuestion from "./ResultQuestion.js";
 
 class Dashboard extends Component {
-  state = {
-    isQuestions: false,
-  };
-
   render() {
     return (
       <ul className="dashboard-list">
@@ -27,7 +21,7 @@ const tabs = (props) => {
         <Tab.Pane>
           {props.unAnsQuestions.map((question) => (
             <li key={question.id}>
-              <AnsQuestion key={question.id} id={question.id} isQuestion={false} />
+              <Question key={question.id} id={question.id} isAnswered={false} />
             </li>
           ))}
         </Tab.Pane>
@@ -39,7 +33,7 @@ const tabs = (props) => {
         <Tab.Pane>
           {props.ansQuestions.map((question) => (
             <li key={question.id}>
-              <ResultQuestion key={question.id} question={question} isQuestion={true} />
+              <Question key={question.id} id={question.id} isAnswered={true} />
             </li>
           ))}
         </Tab.Pane>
@@ -54,11 +48,11 @@ function mapStateToProps({ authedUser, users, questions }) {
   const ansQuestions = Object.values(questions)
     .filter((question) => userAnsweredIds.includes(question.id))
     .sort((a, b) => b.timestamp - a.timestamp);
-    console.log('ans', ansQuestions);
+  console.log("ans", ansQuestions);
   const unAnsQuestions = Object.values(questions)
     .filter((question) => !userAnsweredIds.includes(question.id))
     .sort((a, b) => b.timestamp - a.timestamp);
-    console.log('UNans', unAnsQuestions);
+  console.log("UNans", unAnsQuestions);
   return {
     questionIds: Object.keys(questions).sort(
       (a, b) => questions[b].timestamp - questions[a].timestamp

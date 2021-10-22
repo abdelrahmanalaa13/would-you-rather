@@ -10,23 +10,23 @@ export const receiveUsers = (users) => ({
   users,
 });
 
-const addUserAnswer = (authUser, questionId, answer) => {
+const addUserAnswer = (authedUser, qid, answer) => {
   return {
     type: ADD_USER_ANSWER,
-    authUser,
-    questionId,
+    authedUser,
+    qid,
     answer,
   };
 };
 
-export const handleAddAnswer = (authUser, questionId, answer) => {
+export const handleAddAnswer = (authedUser, qid, answer) => {
   return (dispatch) => {
-    dispatch(addUserAnswer(authUser, questionId, answer));
-    dispatch(answerQuestion(authUser, questionId, answer));
+    dispatch(answerQuestion(authedUser, qid, answer));
+    dispatch(addUserAnswer(authedUser, qid, answer));
 
     return saveQuestionAnswer({
-      authedUser: authUser,
-      qid: questionId,
+      authedUser,
+      qid,
       answer,
     }).catch((e) => {
       console.warn("Error in handleAddAnswer: ", e);
