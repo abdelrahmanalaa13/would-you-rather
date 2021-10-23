@@ -15,8 +15,8 @@ class LeaderBoard extends Component {
     return (
       <Fragment>
         {leaders.map((leader, placeId) => (
-          <div className="question text-bold d-block">
-            <Segment.Group key={leader.id}>
+          <div key={leader.id} className="question text-bold d-block">
+            <Segment.Group>
               <Label corner="left" icon="trophy" color={leadersColors[placeId]} />
               <Grid divided padded>
                 <Grid.Row>

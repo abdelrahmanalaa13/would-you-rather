@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router";
 import { Button, Form, Input } from "semantic-ui-react";
 import { handleAddQuestion } from "../actions/questions";
 
@@ -7,6 +8,7 @@ class NewQuestion extends Component {
   state = {
     OptionOne: "",
     OptionTwo: "",
+    toHome: false,
   };
   handleOptionOne = (e) => {
     const OptionOne = e.target.value;
@@ -27,9 +29,17 @@ class NewQuestion extends Component {
     const { OptionOne, OptionTwo } = this.state;
     if (OptionOne && OptionTwo) {
       dispatch(handleAddQuestion(OptionOne, OptionTwo, authedUser));
+      this.setState(() => ({
+        OptionOne: "",
+        OptionTwo: "",
+        toHome: true,
+      }));
     }
   };
   render() {
+    if (this.state.toHome === true) {
+      return <Redirect to={`/`} />;
+    }
     return (
       <div className="question">
         <div className="center inherit-width">

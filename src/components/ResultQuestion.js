@@ -16,12 +16,13 @@ class ResultQuestion extends Component {
     }
   };
   render() {
-    const { question, users } = this.props;
+    const { authedUser, question, users } = this.props;
     if (!question || !users[question.author]) {
       return <Redirect to="/not-found" />;
     }
     const { timestamp, optionOne, optionTwo, id } = question;
-    const { name, avatarURL, answers } = users[question.author];
+    const { name, avatarURL } = users[question.author];
+    const { answers } = users[authedUser];
     const optionOneVotes = optionOne.votes.length;
     const optionTwoVotes = optionTwo.votes.length;
     const votesTotal = optionOneVotes + optionTwoVotes;
@@ -63,12 +64,12 @@ class ResultQuestion extends Component {
   }
 }
 
-function mapStateToProps({ users, questions }, props) {
-  const { id } = props.match.params;
+function mapStateToProps({ users, questions, authedUser }, { id }) {
   const question = questions[id];
   return {
     users,
     question,
+    authedUser,
   };
 }
 

@@ -1,6 +1,10 @@
 # Would You Rather Project
 
-This is the code for the final assessment project for Udacity's React & Redux course.
+**Author**: Abdelrahman Alaa
+
+**Email**: abdelrahmanalaa139@gmail.com  
+
+## **Description**: This is the code for the final assessment project for Udacity's React & Redux course.
 
 It's built with React, Redux, React Router, & Redux Thunk.
 

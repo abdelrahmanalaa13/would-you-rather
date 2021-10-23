@@ -82,8 +82,7 @@ class AnsQuestion extends Component {
   }
 }
 
-function mapStateToProps({ authedUser, users, questions }, props) {
-  const { id } = props.match.params;
+function mapStateToProps({ authedUser, users, questions }, { id }) {
   const question = questions[id];
   return {
     authedUser,

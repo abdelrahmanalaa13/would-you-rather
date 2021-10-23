@@ -13,9 +13,7 @@ class Question extends Component {
     const { name, avatarURL } = user;
 
     return (
-      <Link
-        to={`/${isAnswered ? "result-question" : "ans-question"}/${id}`}
-      >
+      <Link to={`/questions/${id}`}>
         <div className="question">
           <img src={avatarURL} alt={`Avatar of ${name}`} className="avatar" />
           <div className="question-info">
