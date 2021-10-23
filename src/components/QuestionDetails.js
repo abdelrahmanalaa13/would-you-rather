@@ -28,7 +28,6 @@ function mapStateToProps({ authedUser, users, questions }, props) {
   const userAnsweredIds = Object.keys(users[authedUser].answers);
   const isAnswered = userAnsweredIds.includes(id);
   const question = questions[id];
-  isAnswered;
   return {
     isAnswered,
     question,

@@ -8,7 +8,7 @@ import LoadingBar from "react-redux-loading";
 import NewQuestion from "./NewQuestion";
 import LeaderBoard from "./LeaderBoard";
 import NotFound from "./NotFound";
-import Login from "./Login";
+import Login from "./login";
 import QuestionDetails from "./QuestionDetails";
 class App extends Component {
   componentDidMount() {

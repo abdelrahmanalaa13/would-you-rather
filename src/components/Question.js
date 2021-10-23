@@ -5,7 +5,7 @@ import { formatDate } from "../utils/helpers";
 
 class Question extends Component {
   render() {
-    const { question, user, isAnswered } = this.props;
+    const { question, user } = this.props;
     if (!question) {
       return <p>Couldn't find the question</p>;
     }
@@ -36,12 +36,11 @@ class Question extends Component {
   }
 }
 
-function mapStateToProps({ users, questions }, { id, isAnswered }) {
+function mapStateToProps({ users, questions }, { id }) {
   const question = questions[id];
   return {
     user: users[question.author],
     question: question,
-    isAnswered,
   };
 }
 
